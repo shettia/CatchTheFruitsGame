@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Catch The Fruits!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #game-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #name-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #name-overlay.active {
+            display: flex;
+        }
+
+        .name-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 16px;
+            padding: 36px 32px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(46, 204, 113, 0.3);
+            border: 2px solid #2ecc71;
+            max-width: 340px;
+            width: 90%;
+        }
+
+        .name-box h2 {
+            color: #f1c40f;
+            margin: 0 0 8px 0;
+            font-size: 26px;
+        }
+
+        .name-box p {
+            color: #bdc3c7;
+            margin: 0 0 20px 0;
+            font-size: 14px;
+        }
+
+        .name-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #2ecc71;
+            border-radius: 10px;
+            background: #0f3460;
+            color: #ecf0f1;
+            font-size: 18px;
+            text-align: center;
+            outline: none;
+            margin-bottom: 18px;
+            font-family: inherit;
+        }
+
+        .name-box input:focus {
+            border-color: #f1c40f;
+            box-shadow: 0 0 12px rgba(241, 196, 15, 0.3);
+        }
+
+        .name-box button {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .name-box button:hover {
+            background: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <div id="name-overlay" class="active">
+        <div class="name-box">
+            <h2>Catch The Fruits!</h2>
+            <p>Enter your name to start playing</p>
+            <input type="text" id="player-name" placeholder="Your name..." maxlength="15" autofocus>
+            <br>
+            <button id="start-btn" onclick="submitName()">LET'S GO!</button>
+        </div>
+    </div>
+    <div id="game-container"></div>
+    <script>
+        var playerName = 'Player';
+        function submitName() {
+            var name = document.getElementById('player-name').value.trim();
+            if (name) playerName = name;
+            document.getElementById('name-overlay').classList.remove('active');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('player-name').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') submitName();
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+    <script>
+        if (typeof Phaser === 'undefined') {
+            document.body.innerHTML = '<div style="color:white;text-align:center;padding:40px;font-family:Arial">' +
+                '<h2>Failed to load Phaser library</h2>' +
+                '<p>Please serve this game from a local HTTP server instead of opening the file directly.</p>' +
+                '<p>Run: <code style="background:#333;padding:4px 8px;border-radius:4px">npx http-server -p 8080</code> in the game folder,<br>then open <code style="background:#333;padding:4px 8px;border-radius:4px">http://localhost:8080</code></p></div>';
+        }
+    </script>
+    <script src="js/BootScene.js"></script>
+    <script src="js/MenuScene.js"></script>
+    <script src="js/GameScene.js"></script>
+    <script src="js/GameOverScene.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
