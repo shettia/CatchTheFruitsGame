@@ -159,7 +159,7 @@ class BootScene extends Phaser.Scene {
         basket.beginPath();
         basket.moveTo(15, 20);
         basket.lineTo(5, 72);
-        basket.quadraticCurveTo(w / 2, 82, w - 5, 72);
+        basket.arc(w / 2, 68, w / 2 - 5, Math.PI * 0.95, Math.PI * 0.05, false);
         basket.lineTo(w - 15, 20);
         basket.closePath();
         basket.fillPath();
@@ -169,7 +169,7 @@ class BootScene extends Phaser.Scene {
         basket.beginPath();
         basket.moveTo(22, 24);
         basket.lineTo(14, 66);
-        basket.quadraticCurveTo(w / 2, 74, w - 14, 66);
+        basket.arc(w / 2, 62, w / 2 - 14, Math.PI * 0.95, Math.PI * 0.05, false);
         basket.lineTo(w - 22, 24);
         basket.closePath();
         basket.fillPath();
@@ -224,7 +224,7 @@ class BootScene extends Phaser.Scene {
         basket.lineStyle(2, 0x6B3410);
         basket.beginPath();
         basket.moveTo(8, 70);
-        basket.quadraticCurveTo(w / 2, 80, w - 8, 70);
+        basket.arc(w / 2, 66, w / 2 - 8, Math.PI * 0.95, Math.PI * 0.05, false);
         basket.strokePath();
 
         // Handle - arched wicker handle
